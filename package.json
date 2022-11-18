@@ -4,7 +4,9 @@
   "description": "Serving freshly baked Eclair programs over HTTP.",
   "type": "module",
   "main": "src/index.js",
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint src/"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/luc-tielen/bakery.git"
