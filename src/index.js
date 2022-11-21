@@ -1,11 +1,21 @@
 import { promisify } from 'util';
 import fs from 'fs/promises';
 import { file, withFile } from 'tmp-promise';
-import process from 'child_process';
+import process from 'process';
+import childProcess from 'child_process';
 import express from 'express';
 import bodyParser from 'body-parser';
 
-const execFile = promisify(process.execFile);
+const execFile = promisify(childProcess.execFile);
+
+process.on('SIGINT', () => {
+  console.info('Shutting down server..');
+  process.exit(0);
+});
+process.on('SIGTERM', () => {
+  console.info('Shutting down server..');
+  process.exit(0);
+});
 
 const wallocObjFile = './walloc.o';
 
