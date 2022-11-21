@@ -65,11 +65,13 @@ const main = () => {
       return;
     }
 
-    res.download(wasmFile);
+    res.writeHead(200, { 'Content-Type': 'application/wasm' });
+    res.write(await fs.readFile(wasmFile));
+    res.end();
     await cleanup();
   });
 
-  app.listen(8080);
+  app.listen(8080, '0.0.0.0');
 };
 
 main();

@@ -1,6 +1,7 @@
 FROM primordus/eclair:v0.1.0
 
 WORKDIR /app/bakery
+EXPOSE 8080
 
 RUN git clone https://github.com/wingo/walloc /tmp/walloc \
   && cd /tmp/walloc \
