@@ -27,9 +27,11 @@ $ docker run -p 8080:8080 --rm -it bakery
 
 ## Usage instructions
 
-When you run a bakery instance, you can use the
-[eclair-wasm-bindings package](https://www.npmjs.com/package/eclair-wasm-bindings)
-to run Eclair code as follows:
+You can run bakery yourself using the Docker image in this repository, or you
+can use a publicly hosted image at [https://bakery.fly.dev](bakery.fly.dev).
+
+With bakery and the [eclair-wasm-bindings package](https://www.npmjs.com/package/eclair-wasm-bindings),
+you can run Eclair code as follows:
 
 ```typescript
 import {
@@ -53,10 +55,9 @@ reachable(x, z) :-
   reachable(y, z).
 `;
 
-const BAKERY_URL = 'http://127.0.0.1';
-const BAKERY_PORT = 8080;
 const compileEclairCode = (program: string) =>
-  fetch(`${BAKERY_URL}:${BAKERY_PORT}/`, {
+  fetch('https://bakery.fly.dev', {
+    // locally it is http://127.0.0.1:8080
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ program }),
