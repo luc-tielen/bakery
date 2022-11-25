@@ -43,12 +43,27 @@ const logger = (req, res, next) => {
   next();
 };
 
+const showWelcomePage = (_req, res) => {
+  res.send(`
+  <h1>Welcome to <em>Bakery</em>!</h1>
+
+  <p>
+    Bakery is a webserver that can compile <a href="https://github.com/luc-tielen/eclair-lang">Eclair</a> programs on the fly.
+  </p>
+  <p>
+    For more information on how to use Bakery and Eclair, click <a href="https://github.com/luc-tielen/bakery">here</a>.
+  </p>
+  `);
+};
+
 const main = () => {
   const app = express();
   express.static.mime.types['wasm'] = 'application/wasm';
 
   app.use(bodyParser.json());
   app.use(logger);
+
+  app.get('/', showWelcomePage);
 
   app.post('/', async (req, res) => {
     const program = req.body?.program;
